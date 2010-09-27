@@ -4,6 +4,7 @@ include 'urilze.php';
 // exit;
 $dashes_or_underscores = (!empty($_POST['dashes_or_underscores'])) ? '_' : '-';
 $file_list = !empty($_POST['file_list']) ? stripslashes(htmlspecialchars($_POST['file_list'])) : '';
+$data = '';
     
 if(!empty($file_list)) {
     
@@ -18,6 +19,42 @@ if(!empty($file_list)) {
                 'url'       =>    urlize($file, true, true, $dashes_or_underscores)
             );
     }
+    if(!empty($urlized_files)):
+    ob_start();
+    ?>
+    <div class="data simpleTable spec">
+            
+        <table>
+            <caption class="h3">Great! We cleaned up your filenames:</caption>
+            <colgroup>
+                <col width="45%" />
+                <col width="55%" />
+            </colgroup>
+            <thead>
+                <tr>
+                    <th class="firstTh">Old filename</th>
+                    <th>New filename</th>
+                </tr>
+            </thead>
+            <tbody>
+            <?php
+
+            foreach($urlized_files as $file) {
+                echo '
+                <tr>
+                    <th><small>'.$file['name'].'</small></th>
+                    <td><input type="text" value=\''.$file['url'].'\' onclick="this.select()" /></td>
+                </tr>';
+            }
+
+            ?>
+            </tbody>
+        </table>
+    </div>
+
+    <?php
+    $data = ob_get_clean();
+    endif;
 }
 
 
@@ -27,7 +64,7 @@ if(!empty($file_list)) {
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>URLize.it</title>
     <meta name="Description" content="This tool turns dirty filenames into url-friendly filenames. Great to use before uploading files containing entities in their filenames." />
-    <link rel="stylesheet" type="text/css" href="screen.css?v4" media="screen" />
+    	<link rel="stylesheet" href="screen.css?<?= filemtime(realpath(dirname(__FILE__).'/screen.css')); ?>" type="text/css" media="screen" />
 	<script type="text/javascript">
 
 	  var _gaq = _gaq || [];
@@ -53,39 +90,7 @@ if(!empty($file_list)) {
 
     <div class="page">
         <div class="body">
-            
-            <?php    if(!empty($urlized_files)):    ?>
-            <div class="data simpleTable spec">
-                    
-                <table>
-                    <caption class="h3">Great! We cleaned up your filenames:</caption>
-                    <colgroup>
-                        <col width="45%" />
-                        <col width="55%" />
-                    </colgroup>
-                    <thead>
-                        <tr>
-                            <th class="firstTh">Old filename</th>
-                            <th>New filename</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <?php
-
-                    foreach($urlized_files as $file) {
-                        echo '
-                        <tr>
-                            <th><small>'.$file['name'].'</small></th>
-                            <td><input type="text" value=\''.$file['url'].'\' onclick="this.select()" style="width: 500px" /></td>
-                        </tr>';
-                    }
-
-                    ?>
-                    </tbody>
-                </table>
-            </div>
-
-            <?php    endif;    ?>
+            <div id="data"><?php echo $data; ?></div>
 
             <form action="./" method="post">
                 <div class="line">
