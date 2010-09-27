@@ -1,31 +1,28 @@
 <?php
 include 'urilze.php';
-
+// echo var_dump(stripslashes(htmlspecialchars($_POST['file_list'])));
+// exit;
 if(!empty($_POST)) {
     
-    // Récupération des valeurs issues du formulaire
-    $file_list = !empty($_POST['file_list']) ? htmlspecialchars($_POST['file_list']) : '';
-    $add_target_blank = !empty($_POST['add_target_blank']) ? true : false;
+    $file_list = !empty($_POST['file_list']) ? stripslashes(htmlspecialchars($_POST['file_list'])) : '';
+    $dashes_or_underscores = !empty($_POST['dashes_or_underscores']) ? '-' : '_';
     
     if(!empty($file_list)) {
         
-        $a_file = explode("\n", $file_list);
-
+        $files = explode("\n", $file_list);
         
-        $a_urlized_file = array();
+        $urlized_files = array();
         
-        foreach($a_file as $file) {
-            $file = $file;
-            
+        foreach($files as $file) {
             if (trim(rtrim($file)) != '')
-                $a_urlized_file[] = array(
+                $urlized_files[] = array(
                     'name'      =>    $file,
-                    'url'       =>    file_adresse($file, true),
-                    'link'      =>    '<a href="'.file_adresse($file, true, true).'"'.($add_target_blank ? ' target="_blank"' : '').'>'.$file.'</a>'
-                    );
+                    'url'       =>    urlize($file, true, true, $dashes_or_underscores)
+                );
         }
     }
 }
+
 
 ?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
@@ -60,32 +57,29 @@ if(!empty($_POST)) {
     <div class="page">
         <div class="body">
             
-            <?php    if(!empty($a_urlized_file)):    ?>
+            <?php    if(!empty($urlized_files)):    ?>
             <div class="data simpleTable spec">
                     
                 <table>
                     <caption class="h3">Great! We cleaned up your filenames:</caption>
                     <colgroup>
-                        <col width="40%" />
-                        <col width="30%" />
-                        <col width="30%" />
+                        <col width="45%" />
+                        <col width="55%" />
                     </colgroup>
                     <thead>
                         <tr>
                             <th class="firstTh">Old filename</th>
                             <th>New filename</th>
-                            <th class="lastTh">Code</th>
                         </tr>
                     </thead>
                     <tbody>
                     <?php
 
-                    foreach($a_urlized_file as $file) {
+                    foreach($urlized_files as $file) {
                         echo '
                         <tr>
                             <th><small>'.$file['name'].'</small></th>
-                            <td><input type="text" value=\''.$file['url'].'\' onclick="this.select()" size="45" /></td>
-                            <td><input type="text" value=\''.$file['link'].'\' onclick="this.select()" size="45" /></td>
+                            <td><input type="text" value=\''.$file['url'].'\' onclick="this.select()" style="width: 500px" /></td>
                         </tr>';
                     }
 
@@ -108,9 +102,9 @@ if(!empty($_POST)) {
                     </div>
                     <div class="unit size2of5 lastUnit">
                          <fieldset>
-                            <legend>Do you want these links to <strong>open a new window</strong>?</legend>
-                            <label for="add_target_blank_1" class="label"><input type="radio" name="add_target_blank" id="add_target_blank_1" class="check-radio" value="1" />&nbsp;Yes, add target="_blank" to these links.</label>
-                            <label for="add_target_blank_0" class="label"><input type="radio" name="add_target_blank" id="add_target_blank_0" class="check-radio" value="0" checked="checked" />&nbsp;No way, keep my code clean, you fool!</label>
+                            <legend>Are you <strong>underscores or dashes</strong>?</legend>
+                            <label for="dashes_or_underscores_1" class="label"><input type="radio" name="dashes_or_underscores" id="dashes_or_underscores_1" class="check-radio" value="0" /> format-with-dashes</label>
+                            <label for="dashes_or_underscores_0" class="label"><input type="radio" name="dashes_or_underscores" id="dashes_or_underscores_0" class="check-radio" value="1" checked="checked" /> or_with_underscores</label>
                         </fieldset>
                     </div>
                 </div>

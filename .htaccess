@@ -1,4 +1,16 @@
 SetEnv PHP_VER 5
+
+<IfModule mod_mime.c>
+	AddDefaultCharset UTF-8
+</IfModule>
+
+<IfModule mod_php5.c>
+	php_flag asp_tags off
+	php_flag magic_quotes_gpc off
+	php_flag register_globals off
+	php_flag auto_globals_jit on
+</IfModule>
+
 # gzip compression.
 <IfModule mod_deflate.c>
 
