@@ -33,7 +33,7 @@ if(!empty($file_list)) {
             <thead>
                 <tr>
                     <th class="firstTh">Old filename</th>
-                    <th>New filename</th>
+                    <th class="lastTh">New filename</th>
                 </tr>
             </thead>
             <tbody>
