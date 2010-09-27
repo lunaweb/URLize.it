@@ -78,8 +78,11 @@ function urlize( $filename, $showextension = true, $showfullpath = true, $separa
     if (!empty($pathinfo['dirname'])) {
         $pathparts = explode('/', $pathinfo['dirname']);
         $dirname = implode('/', array_map('slugify', $pathparts, array_fill(0, count($pathparts), $separator)));
-        if ($showfullpath && $dirname != '.')
-            return $dirname.(($dirname == '/') ? '' : '/').slugify($pathinfo['filename'], $separator).'.'.mb_strtolower($pathinfo['extension']);
+        if ($showfullpath && $dirname != '.') {
+            return $dirname.(($dirname == '/') ? '' : '/')
+                .slugify($pathinfo['filename'], $separator)
+                .(($showextension && !empty($pathinfo['extension'])) ? '.'.mb_strtolower($pathinfo['extension']) : '');
+        }
     }
 
     if ($showextension && !empty($pathinfo['extension']))
