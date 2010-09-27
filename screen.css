@@ -105,8 +105,8 @@ html, body { background: #F2F2F2 url(background.png); color: #242426; -webkit-te
     text-align: center;
 }
 .foot {
-    font-size: .9em;
-    line-height: 1.4em;
+    font-size: 12px;
+    line-height: 16px;
     color: #666;
     margin-top: 2em;
     border-top: 1px solid #fff;
@@ -159,14 +159,15 @@ fieldset {
     margin-top: 2.5em;
     padding: 10px 10px 10px 20px;
     margin-bottom: 10px;
-    font-size: .9em;
-    line-height: 1.2em;
+    font-size: 12px;
+    line-height: 16px;
 }
     .label {
         display: block;
-        padding: .4em 0 .4em .3em;
-        line-height: 1.3em;
+        padding: .2em 0 .4em .3em;
+        
     }
+    .label b { color: #333; font-weight: normal; text-shadow: 0 1px 0 #fff; font-size: 14px;}
     .label input { position: relative; top: 1px; left: -2px;}
 input[type=text] {
     width: 500px;

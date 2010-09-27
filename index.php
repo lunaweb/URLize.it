@@ -32,7 +32,7 @@ if(!empty($file_list)) {
             </colgroup>
             <thead>
                 <tr>
-                    <th class="firstTh">Old filename</th>
+                    <th class="firstTh">Old, scary filename</th>
                     <th class="lastTh">URLized, clean and healthy filename</th>
                 </tr>
             </thead>
@@ -104,9 +104,9 @@ if(!empty($file_list)) {
                     </div>
                     <div class="unit size2of5 lastUnit">
                          <fieldset>
-                            <legend>Are you <strong>underscores or dashes</strong>?</legend>
-                            <label for="dashes_or_underscores_1" class="label"><input type="radio" name="dashes_or_underscores" id="dashes_or_underscores_1" class="check-radio" value="0"<?php echo (($dashes_or_underscores == '-') ? ' checked="checked"' : ''); ?> /> format-with-dashes</label>
-                            <label for="dashes_or_underscores_0" class="label"><input type="radio" name="dashes_or_underscores" id="dashes_or_underscores_0" class="check-radio" value="1"<?php echo (($dashes_or_underscores == '_') ? ' checked="checked"' : ''); ?> /> or_with_underscores</label>
+                            <legend>Option : <strong>underscores or dashes</strong>?</legend>
+                            <label for="dashes_or_underscores_1" class="label"><input type="radio" name="dashes_or_underscores" id="dashes_or_underscores_1" class="check-radio" value="0"<?php echo (($dashes_or_underscores == '-') ? ' checked="checked"' : ''); ?> /> default<b>-</b>style<b>-</b>with<b>-</b>dashes</label>
+                            <label for="dashes_or_underscores_0" class="label"><input type="radio" name="dashes_or_underscores" id="dashes_or_underscores_0" class="check-radio" value="1"<?php echo (($dashes_or_underscores == '_') ? ' checked="checked"' : ''); ?> /> going<b>_</b>oldschool<b>_</b>with<b>_</b>underscores</label>
                         </fieldset>
                     </div>
                 </div>
