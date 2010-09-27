@@ -1,0 +1,27 @@
+urlize.it API proposal
+========================
+
+Url
+---
+
+    http://urlize.it/api/
+
+Request
+-------
+
+AN HTTP POST request with a `dirty-url` parameter
+
+
+Response
+--------
+
+A json encoded string with the `dirty-url` and `cleaned-url` values:
+
+    { "dirty-url": "dirty url accuentu\u00e9e!",
+      "urlized-data": "dirty_url_accuentu__e_" }
+      
+      
+Advanced features
+-----------------
+
+We can also provide an optional `callback` parameter (for javascript async requests).

@@ -1,0 +1,91 @@
+SetEnv PHP_VER 5
+# gzip compression.
+<IfModule mod_deflate.c>
+
+# html, xml, css, and js:
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css application/x-javascript text/javascript application/javascript application/json 
+
+# webfonts and svg:
+  <FilesMatch "\.(ttf|otf|eot|svg)$" >
+    SetOutputFilter DEFLATE
+  </FilesMatch>
+</IfModule>
+
+
+
+
+# these are pretty far-future expires headers
+# they assume you control versioning with cachebusting query params like
+#   <script src="application.js?20100608">
+# additionally, consider that outdated proxies may miscache 
+#   www.stevesouders.com/blog/2008/08/23/revving-filenames-dont-use-querystring/
+
+# if you don't use filenames to version, lower the css and js to something like
+#   "access plus 1 week" or so
+
+<IfModule mod_expires.c>
+  Header set cache-control: public
+  ExpiresActive on
+
+# Perhaps better to whitelist expires rules? Perhaps.
+  ExpiresDefault                          "access plus 2 months"
+
+# cache.manifest needs re-requests in FF 3.6 (thx Remy ~Introducing HTML5)
+  ExpiresByType text/cache-manifest       "access plus 0 seconds"
+
+# your document html 
+  ExpiresByType text/html                  "access"
+
+# favicon (cannot be renamed)
+  ExpiresByType image/vnd.microsoft.icon  "access plus 1 week" 
+
+# media: images, video, audio
+  ExpiresByType image/png                 "access plus 1 year"
+  ExpiresByType image/jpg                 "access plus 1 year"
+  ExpiresByType image/jpeg                "access plus 1 year"
+  ExpiresByType video/ogg                 "access plus 1 year"
+  ExpiresByType audio/ogg                 "access plus 1 year"
+  ExpiresByType video/mp4                 "access plus 1 year"
+  
+  
+# css and javascript
+  ExpiresByType text/css                  "access plus 1 year"
+  ExpiresByType application/javascript    "access plus 1 year"
+  ExpiresByType text/javascript           "access plus 1 year"
+</IfModule>
+
+
+
+
+# Since we're sending far-future expires, we don't need ETags for
+# static content.
+#   developer.yahoo.com/performance/rules.html#etags
+FileETag None
+
+
+
+
+# Allow cookies to be set from iframes (for IE only)
+# If needed, uncomment and specify a path or regex in the Location directive
+
+# <IfModule mod_headers.c>
+#   <Location />
+#     Header set P3P "policyref=\"/w3c/p3p.xml\", CP=\"IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT\""
+#   </Location>
+# </IfModule>
+
+
+# you probably want www.example.com to forward to example.com -- shorter URLs are sexier.
+#   no-www.org/faq.php?q=class_b
+RewriteEngine On
+RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
+
+
+# without -MultiViews, Apache will give a 404 for a rewrite if a folder of the same name does not exist (e.g. “/blog/hello”)
+#   webmasterworld.com/apache/3808792.htm
+# Options -MultiViews 
+# -Indexes will have Apache block users from browsing folders without a default document
+# Options -Indexes
+
+
