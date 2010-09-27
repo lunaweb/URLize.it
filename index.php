@@ -25,7 +25,7 @@ if(!empty($file_list)) {
     <div class="data simpleTable spec">
             
         <table>
-            <caption class="h3">Great! We cleaned up your filenames:</caption>
+            <caption class="h3">Great! We cleaned up your filename<?php echo ((count($urlized_files) > 1) ? 's' : '') ?>:</caption>
             <colgroup>
                 <col width="45%" />
                 <col width="55%" />
@@ -33,7 +33,7 @@ if(!empty($file_list)) {
             <thead>
                 <tr>
                     <th class="firstTh">Old filename</th>
-                    <th class="lastTh">New filename</th>
+                    <th class="lastTh">URLized, clean and healthy filename</th>
                 </tr>
             </thead>
             <tbody>
