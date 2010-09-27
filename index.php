@@ -2,24 +2,21 @@
 include 'urilze.php';
 // echo var_dump(stripslashes(htmlspecialchars($_POST['file_list'])));
 // exit;
-if(!empty($_POST)) {
+$dashes_or_underscores = (!empty($_POST['dashes_or_underscores'])) ? '_' : '-';
+$file_list = !empty($_POST['file_list']) ? stripslashes(htmlspecialchars($_POST['file_list'])) : '';
     
-    $file_list = !empty($_POST['file_list']) ? stripslashes(htmlspecialchars($_POST['file_list'])) : '';
-    $dashes_or_underscores = !empty($_POST['dashes_or_underscores']) ? '-' : '_';
+if(!empty($file_list)) {
     
-    if(!empty($file_list)) {
-        
-        $files = explode("\n", $file_list);
-        
-        $urlized_files = array();
-        
-        foreach($files as $file) {
-            if (trim(rtrim($file)) != '')
-                $urlized_files[] = array(
-                    'name'      =>    $file,
-                    'url'       =>    urlize($file, true, true, $dashes_or_underscores)
-                );
-        }
+    $files = explode("\n", $file_list);
+    
+    $urlized_files = array();
+    
+    foreach($files as $file) {
+        if (trim(rtrim($file)) != '')
+            $urlized_files[] = array(
+                'name'      =>    $file,
+                'url'       =>    urlize($file, true, true, $dashes_or_underscores)
+            );
     }
 }
 
@@ -103,8 +100,8 @@ if(!empty($_POST)) {
                     <div class="unit size2of5 lastUnit">
                          <fieldset>
                             <legend>Are you <strong>underscores or dashes</strong>?</legend>
-                            <label for="dashes_or_underscores_1" class="label"><input type="radio" name="dashes_or_underscores" id="dashes_or_underscores_1" class="check-radio" value="0" /> format-with-dashes</label>
-                            <label for="dashes_or_underscores_0" class="label"><input type="radio" name="dashes_or_underscores" id="dashes_or_underscores_0" class="check-radio" value="1" checked="checked" /> or_with_underscores</label>
+                            <label for="dashes_or_underscores_1" class="label"><input type="radio" name="dashes_or_underscores" id="dashes_or_underscores_1" class="check-radio" value="0"<?php echo (($dashes_or_underscores == '-') ? ' checked="checked"' : ''); ?> /> format-with-dashes</label>
+                            <label for="dashes_or_underscores_0" class="label"><input type="radio" name="dashes_or_underscores" id="dashes_or_underscores_0" class="check-radio" value="1"<?php echo (($dashes_or_underscores == '_') ? ' checked="checked"' : ''); ?> /> or_with_underscores</label>
                         </fieldset>
                     </div>
                 </div>

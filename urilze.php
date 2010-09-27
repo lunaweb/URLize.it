@@ -24,6 +24,7 @@ function replace_newline( $string ) {
  **/
 
 function slugify( $string, $separator = '-' ) {
+    
     $string = replace_newline($string);
     
     $replacement = array(
@@ -51,7 +52,7 @@ function slugify( $string, $separator = '-' ) {
     foreach($replacement as $output => $input) {
         $string = str_replace($input, $output, $string);
     }
-    $string = preg_replace('#(-+)#', $separator, preg_replace('#[\s]+#', $separator, rtrim(trim(preg_replace('#[^a-z0-9_.\s]#', ' ', mb_strtolower($string, mb_internal_encoding()))))));
+    $string = preg_replace('#('.$separator.'+)#', $separator, preg_replace('#[\s]+#', $separator, rtrim(trim(preg_replace('#[^a-z0-9.\s]#', ' ', mb_strtolower($string, mb_internal_encoding()))))));
 
     return $string;
 }
@@ -69,14 +70,14 @@ function slugify( $string, $separator = '-' ) {
  * @param string $separator Optional. Default is a dash (-). Sets the separator between words. One char (a dash or an underscore).
  **/
 
-function urlize( $filename, $showextension = true, $showfullpath = false, $separator = '-') {
+function urlize( $filename, $showextension = true, $showfullpath = true, $separator = '-') {
     
     setlocale(LC_ALL, 'fr_FR@euro'); // Needed for pathinfo to deal with multibyte strings
     
     $pathinfo = pathinfo($filename);
     if (!empty($pathinfo['dirname'])) {
-        $dirname = implode('/', array_map('slugify', explode('/', $pathinfo['dirname'])));
-        
+        $pathparts = explode('/', $pathinfo['dirname']);
+        $dirname = implode('/', array_map('slugify', $pathparts, array_fill(0, count($pathparts), $separator)));
         if ($showfullpath && $dirname != '.')
             return $dirname.(($dirname == '/') ? '' : '/').slugify($pathinfo['filename'], $separator).'.'.mb_strtolower($pathinfo['extension']);
     }
