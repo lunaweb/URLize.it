@@ -1,4 +1,10 @@
 <?php
+/**
+ * URLize.it Functions
+ *
+ * @author Kaelig
+ * @package URLizeIt
+ **/
 
 /**
  * replace_newline function
