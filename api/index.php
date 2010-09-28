@@ -1,7 +1,7 @@
 <?php
 
 require 'vendor/limonade/lib/limonade.php';
-require '../urilze.php';
+require '../urlize.php';
 
 # POST /
 dispatch_post('/', 'new_urlizisation');

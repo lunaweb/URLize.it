@@ -10,9 +10,9 @@
  * replace_newline function
  * Returns unix (\n) linebreaks
  *
- * @return string
  * @author Kaelig
  * @param string $string A multibyte string
+ * @return string
  **/
 
 function replace_newline( $string ) {
@@ -23,10 +23,10 @@ function replace_newline( $string ) {
  * slugify function
  * Converts a multibyte string to an slugified string
  *
- * @return string
  * @author Kaelig
  * @param string $string A multibyte string
  * @param string $separator Optional. Default is a dash (-). Sets the separator between words. One char (a dash or an underscore).
+ * @return string
  **/
 
 function slugify( $string, $separator = '-' ) {
@@ -68,12 +68,12 @@ function slugify( $string, $separator = '-' ) {
  * urlize function
  * Converts a filename or a path to a properly urlized string
  *
- * @return string
  * @author Kaelig
  * @param string $filename A multibyte string
  * @param bool $showextension Optional. Default is true. Will show the extension at the end of the slugified filename if $filename has an extension
  * @param bool $showfullpath Optional. Default is true. If false, function will return a filename without a directory path.
  * @param string $separator Optional. Default is a dash (-). Sets the separator between words. One char (a dash or an underscore).
+ * @return string
  **/
 
 function urlize( $filename, $showextension = true, $showfullpath = true, $separator = '-') {

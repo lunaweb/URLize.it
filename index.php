@@ -1,5 +1,5 @@
 <?php
-include 'urilze.php';
+include 'urlize.php';
 // echo var_dump(stripslashes(htmlspecialchars($_POST['file_list'])));
 // exit;
 $dashes_or_underscores = (!empty($_POST['dashes_or_underscores'])) ? '_' : '-';
