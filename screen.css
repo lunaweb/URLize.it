@@ -83,6 +83,11 @@ table h1,table h2,table h3, table h4, table h5, table h6, table p, table ul, tab
 
 body, input, textarea {font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;}
 html, body { background: #F2F2F2 url(background.png); color: #242426; -webkit-text-size-adjust: none;}
+body {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    cursor: default;
+}
 
 .headWrapper {
     background: #333 url(head_background.png) 0 0 repeat-x;
@@ -245,7 +250,20 @@ textarea {
     background: white;
 }
 #infotip { margin-top: 1em;}
-.infotip{margin:0 10px 15px;padding:10px;font-size:12px;color:#333;background:#FDFED4;border:1px solid #deea53;border-right-color:#eff2c7;border-bottom-color:#eff2c7;-webkit-border-radius:3px;-moz-border-radius:3px;}
+.infotip {
+    margin: 15px 10px 10px 0;
+    background: #FFFBE5;
+    border: 1px solid #eFeBd5;
+    border-bottom: 1px solid #dFdBc5;
+    border-right: 1px solid #dFdBc5;
+    padding: 10px 15px;
+    -moz-border-radius: 5px;
+    position: relative;
+    -webkit-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    border-radius: 5px;
+    color: #8d785a;
+}
 
 /* Tables */
 .data {
@@ -288,7 +306,8 @@ textarea {
     	}
 	.data table tbody th {
 		font-family: 'Monaco', 'andale mono', 'lucida console', monospace;
-        
+        -webkit-user-select: text;
+        -moz-user-select: text;
 	}
 	.data table tbody tr:hover td,
 	.data table tbody tr:hover th {
@@ -306,13 +325,26 @@ textarea {
 }
 
 .code {
+    color: #333;
+    font-size: 12px;
+    line-height: 18px;
     font-family: 'Monaco', 'andale mono', 'lucida console', monospace;
+    padding: 4px;
+    margin-right: 60px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    border-radius: 5px;
+    border: 1px solid rgba(0,0,0,0.1);
+    background: rgba(255,255,255,0.5);
+    -webkit-user-select: text;
+    -moz-user-select: text;
 }
 .inner { position: relative;}
 .help {
     z-index: 12;
     position: absolute;
-    top: 20px;
+    top: 35px;
     right: 20px;
     width: 48px;
     height: 0;
