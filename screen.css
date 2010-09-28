@@ -48,9 +48,8 @@ code{color:#0B8C8F;}
 
 .important a{font-weight:bold;}/* what is this? */
 /* links */
-a {color: #203C73; text-decoration: none;}
+a {color: #203C73; text-decoration: none; outline: none; -moz-outline: none;}
 a:focus, a:hover {text-decoration: underline;}
-a:focus{background-color:#FFFFCC;}
 /* ====== Lists ======*/
 /* numbered list */
 ol.simpleList li{list-style-type: decimal; margin-left:40px;}
@@ -84,11 +83,10 @@ table h1,table h2,table h3, table h4, table h5, table h6, table p, table ul, tab
 body, input, textarea {font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;}
 html, body { background: #F2F2F2 url(background.png); color: #242426; -webkit-text-size-adjust: none;}
 body {
-    -webkit-user-select: none;
-    -moz-user-select: none;
     cursor: default;
+    -webkit-user-select: none;
+    -moz-user-select: -moz-none;
 }
-
 .headWrapper {
     background: #333 url(head_background.png) 0 0 repeat-x;
     border-bottom: 1px solid #000;
