@@ -92,7 +92,7 @@ function urlize( $filename, $showextension = true, $showfullpath = true, $separa
     }
 
     if ($showextension && !empty($pathinfo['extension']))
-        return slugify($pathinfo['filename'], $separator).'.'.mb_strtolower($pathinfo['extension']);
+        return trim(slugify($pathinfo['filename'], $separator).'.'.mb_strtolower($pathinfo['extension']));
     else 
-        return slugify($pathinfo['filename'], $separator);
+        return trim(slugify($pathinfo['filename'], $separator));
 }
